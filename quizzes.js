@@ -1,0 +1,3 @@
+window.SZQuizzes={
+  fromText(text,count=5){const lines=text.split(/\n+/).map(s=>s.trim()).filter(s=>s.length>25);return lines.slice(0,count).map((line,i)=>{const correct=line.replace(/^[-*•\d.)\s]+/,"");const distractors=lines.filter(x=>x!==line).slice(0,3).map(x=>x.replace(/^[-*•\d.)\s]+/,""));while(distractors.length<3)distractors.push(["Review the concept in more detail.","A related idea that does not match this statement.","None of the above statements"][distractors.length]);const options=[correct,...distractors].sort(()=>Math.random()-.5);return {question:"Which statement matches this point from your material?",options,answer:options.indexOf(correct),explanation:"Source statement: "+correct,topic:"General"}})}
+};

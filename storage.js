@@ -1,0 +1,10 @@
+/* Local-first storage. Browser storage is not cloud sync and may be cleared by the browser. */
+(function(){
+  const KEY="szlyana-v1";
+  const initial={materials:[],decks:[],quizResults:[],mistakes:[],tasks:[],sessions:[],notes:[],settings:{theme:"light",dailyGoal:60,language:"English",explanationStyle:"Explain Simply"},stats:{flashcardsReviewed:0,topicsPracticed:0}};
+  function load(){try{return {...structuredClone(initial),...JSON.parse(localStorage.getItem(KEY)||"{}")}}catch(e){return structuredClone(initial)}}
+  let data=load();
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(data));return true}catch(e){return false}}
+  function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
+  window.SZStore={get:()=>data,save,uid,reset(){data=structuredClone(initial);save()},updateSettings(v){data.settings={...data.settings,...v};save()},addMaterial(m){const item={id:uid(),createdAt:new Date().toISOString(),lastOpened:null,status:"ready",...m};data.materials.unshift(item);save();return item},deleteMaterial(id){data.materials=data.materials.filter(x=>x.id!==id);save()},addDeck(d){const item={id:uid(),createdAt:new Date().toISOString(),...d};data.decks.unshift(item);save();return item},addQuizResult(r){data.quizResults.unshift({id:uid(),date:new Date().toISOString(),...r});save()},addMistake(m){data.mistakes.unshift({id:uid(),date:new Date().toISOString(),reviewed:false,...m});save()},addTask(t){data.tasks.unshift({id:uid(),completed:false,...t});save()},addSession(s){data.sessions.unshift({id:uid(),date:new Date().toISOString(),...s});save()},addNote(n){data.notes.unshift({id:uid(),updatedAt:new Date().toISOString(),...n});save()},touchMaterial(id){const m=data.materials.find(x=>x.id===id);if(m){m.lastOpened=new Date().toISOString();save()}}};
+})();

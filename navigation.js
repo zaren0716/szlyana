@@ -1,0 +1,1 @@
+window.SZNav={go(page){window.SZApp.render(page);document.querySelectorAll(".nav-item").forEach(b=>b.classList.toggle("active",b.dataset.page===page));document.getElementById("pageCrumb").textContent=page;document.getElementById("sidebar").classList.remove("open");document.getElementById("sidebarScrim").classList.remove("show");window.scrollTo({top:0,behavior:"smooth"})}};

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#8B5CF6">
+  <meta name="description" content="SZLYANA — Your lessons. Your pace. Your way.">
+  <title>SZLYANA — Your personal study space</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/themes.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" data-page="Dashboard" aria-label="SZLYANA home">
+        <span class="brand-mark">✳</span><span><b>SZLYANA</b><small>Your personal study space</small></span>
+      </a>
+      <button class="sidebar-close icon-button" id="sidebarClose" aria-label="Close menu">×</button>
+      <nav id="mainNav" aria-label="Main navigation">
+        <p class="nav-label">HOME</p>
+        <button class="nav-item active" data-page="Dashboard"><span class="nav-icon">⌂</span>Dashboard</button>
+        <button class="nav-item" data-page="My Library"><span class="nav-icon">▤</span>My Library</button>
+        <button class="nav-item" data-page="Subjects & Collections"><span class="nav-icon">▦</span>Subjects & Collections</button>
+        <p class="nav-label">STUDY TOOLS</p>
+        <button class="nav-item" data-page="Flashcards"><span class="nav-icon">▣</span>Flashcards</button>
+        <button class="nav-item" data-page="Quizzes & Mock Exams"><span class="nav-icon">☷</span>Quizzes & Mock Exams</button>
+        <button class="nav-item" data-page="AI Tutor"><span class="nav-icon">✧</span>AI Tutor <span class="soon-dot"></span></button>
+        <button class="nav-item" data-page="AI Notes & Summaries"><span class="nav-icon">≡</span>AI Notes & Summaries</button>
+        <button class="nav-item" data-page="Mind Maps"><span class="nav-icon">◎</span>Mind Maps</button>
+        <button class="nav-item" data-page="Study Planner"><span class="nav-icon">▧</span>Study Planner</button>
+        <button class="nav-item" data-page="Focus Room"><span class="nav-icon">◷</span>Focus Room</button>
+        <p class="nav-label">MY PROGRESS</p>
+        <button class="nav-item" data-page="Smart Review"><span class="nav-icon">↻</span>Smart Review</button>
+        <button class="nav-item" data-page="Mistake Notebook"><span class="nav-icon">⌁</span>Mistake Notebook</button>
+        <button class="nav-item" data-page="Weak Topics"><span class="nav-icon">◌</span>Weak Topics</button>
+        <button class="nav-item" data-page="Learning Analytics"><span class="nav-icon">▥</span>Learning Analytics</button>
+        <p class="nav-label">PREFERENCES</p>
+        <button class="nav-item" data-page="Settings"><span class="nav-icon">⚙</span>Settings</button>
+        <button class="nav-item" data-page="Help & About"><span class="nav-icon">?</span>Help & About</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="mini-avatar">S</div><div><b>Your study space</b><small>Saved on this device</small></div><button class="icon-button" data-page="Settings" aria-label="Settings">⚙</button></div>
+    </aside>
+    <div class="sidebar-scrim" id="sidebarScrim"></div>
+    <main class="main-area">
+      <header class="topbar">
+        <button class="icon-button menu-button" id="menuButton" aria-label="Open navigation">☰</button>
+        <div class="breadcrumb"><span>Workspace</span><span class="crumb-sep">/</span><b id="pageCrumb">Dashboard</b></div>
+        <div class="top-actions"><button class="icon-button" id="themeQuick" aria-label="Toggle theme" title="Toggle theme">☾</button><button class="avatar-button" aria-label="Open settings" data-page="Settings">S</button></div>
+      </header>
+      <div class="page-wrap" id="pageContent" tabindex="-1"></div>
+      <footer class="app-footer">Made for your next little breakthrough <span>✳</span></footer>
+    </main>
+  </div>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <dialog class="modal" id="uploadModal">
+    <form method="dialog" class="modal-head"><div><p class="eyebrow">BUILD YOUR LIBRARY</p><h2>Add study material</h2><p class="muted">Bring your lessons into one calm, organized space.</p></div><button class="icon-button" aria-label="Close dialog">×</button></form>
+    <div class="modal-body">
+      <div class="drop-zone" id="dropZone"><div class="upload-symbol">↑</div><h3>Drop your files here</h3><p class="muted">Or choose files from your device</p><label class="button primary" for="fileInput">Choose files</label><input id="fileInput" type="file" multiple accept=".txt,.md,.csv,.pdf,.docx,.pptx,.png,.jpg,.jpeg,.webp" hidden><p class="tiny muted">TXT and text-based files are supported for local text extraction. Other formats can be saved, but need a parser for readable content.</p></div>
+      <div class="field"><label for="materialTitle">Material title (for pasted notes)</label><input id="materialTitle" placeholder="e.g. Networking — Lesson 1"></div>
+      <div class="field"><label for="materialSubject">Subject or collection</label><input id="materialSubject" placeholder="e.g. Networking"></div>
+      <div class="field"><label for="pasteText">Paste notes or lesson text</label><textarea id="pasteText" rows="4" placeholder="Paste your notes here..."></textarea></div>
+      <div class="field"><label for="materialUrl">Public webpage or document link</label><input id="materialUrl" type="url" placeholder="https://..."><p class="tiny muted">The link is saved as a reference. This browser-only version cannot extract private or cross-origin webpage content.</p></div>
+      <div class="modal-actions"><button class="button secondary" id="cancelUpload">Cancel</button><button class="button primary" id="saveMaterial">Save material</button></div>
+      <p class="tiny muted" id="uploadStatus"></p>
+    </div>
+  </dialog>
+  <dialog class="modal" id="quickModal"><div class="modal-head"><div><p class="eyebrow">QUICK STUDY</p><h2 id="quickModalTitle">Create a study set</h2><p class="muted" id="quickModalDescription"></p></div><button class="icon-button" id="quickModalClose" aria-label="Close dialog">×</button></div><div class="modal-body" id="quickModalBody"></div></dialog>
+  <script src="js/storage.js"></script>
+  <script src="js/library.js"></script>
+  <script src="js/flashcards.js"></script>
+  <script src="js/quizzes.js"></script>
+  <script src="js/focus-room.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
